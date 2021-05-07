@@ -1,13 +1,43 @@
-import React from 'react'
+import React from "react";
+import styles from "./ModalAddCity.module.scss";
+import iconPlus from "../../assets/add.svg";
+import iconSearch from "../../assets/search.svg";
 
-const ModalAddCity = () => {
-    return (
-        <div>
-            ModalAddCity
+type Props = {
+  onClose: () => void;
+  onSendCity: (name: string) => void;
+  error: boolean;
+};
+
+const ModalAddCity: React.FC<Props> = ({ onClose, onSendCity, error }) => {
+  const [nameCity, setNameCity] = React.useState("");
+  return (
+    <div className={styles.modalContainer}>
+      <div className={styles.modal}>
+        <div className={styles.header}>
+          <span>Choose a city</span>
+          <img src={iconPlus} alt="close" onClick={() => onClose()} />
         </div>
-    )
-}
-
+        <div className={styles.content}>
+          <div className={styles.inputSearch}>
+            <input type="text" onChange={(e) => setNameCity(e.target.value)} />
+            <img className={styles.iconSearch} src={iconSearch} alt="search" />
+          </div>
+          {error && <div className={styles.error}>error</div>}
+        </div>
+        <div className={styles.actions}>
+          <button onClick={() => onClose()}> Cancel </button>
+          <button
+            onClick={() => {
+              onSendCity(nameCity);
+            }}
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ModalAddCity;
-

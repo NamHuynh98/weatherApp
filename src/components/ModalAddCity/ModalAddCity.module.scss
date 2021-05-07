@@ -1,0 +1,145 @@
+.modalContainer {
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 4s;
+  }
+
+  &.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 4s;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 200px;
+  background-color: #fff;
+  box-sizing: border-box;
+  color: rgb(109, 109, 109);
+  border-radius: 3px;
+  user-select: none;
+
+  .header {
+    height: 40px;
+    border-bottom: 2px solid rgb(184, 184, 184);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+
+    img {
+      margin-left: auto;
+      width: 13px;
+      height: 13px;
+      transform: rotate(45deg);
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+
+    .inputSearch {
+      position: relative;
+      width: 80%;
+      margin: auto;
+
+      input {
+        height: 30px;
+        width: 100%;
+        border: 1px solid rgb(184, 184, 184);
+        border-radius: 5px;
+        padding: 0 30px 0 5px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      .iconSearch {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        right: 10px;
+        top: 8px;
+      }
+    }
+  }
+
+  .actions {
+    height: 50px;
+    border-top: 2px solid rgb(184, 184, 184);
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 10px;
+      background-color: #fff;
+      border: 0;
+      box-shadow: 0px 0px 2px;
+      border-radius: 3px;
+      padding: 0 10px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:last-child {
+        background-color: #000a3e;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.error {
+  color: red;
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
