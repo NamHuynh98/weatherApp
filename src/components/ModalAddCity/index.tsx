@@ -11,12 +11,16 @@ type Props = {
 
 const ModalAddCity: React.FC<Props> = ({ onClose, onSendCity, error }) => {
   const [nameCity, setNameCity] = React.useState("");
+
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modal}>
         <div className={styles.header}>
           <span>Choose a city</span>
-          <img src={iconPlus} alt="close" onClick={() => onClose()} />
+          <img src={iconPlus} alt="close" onClick={() => {
+            onClose();
+            setNameCity("")
+          }} />
         </div>
         <div className={styles.content}>
           <div className={styles.inputSearch}>
@@ -26,10 +30,11 @@ const ModalAddCity: React.FC<Props> = ({ onClose, onSendCity, error }) => {
           {error && <div className={styles.error}>error</div>}
         </div>
         <div className={styles.actions}>
-          <button onClick={() => onClose()}> Cancel </button>
+          <button onClick={() => { onClose(); setNameCity("") }}> Cancel </button>
           <button
             onClick={() => {
               onSendCity(nameCity);
+              setNameCity("");
             }}
           >
             OK

@@ -6,7 +6,6 @@ import Dashboard from "./pages/Dashboard";
 import * as path from "./constant/router";
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -58,10 +57,8 @@ const App = () => {
     "Munich",
     "Cologne",
   ]);
-
   React.useEffect(() => {
     const store = localStorage.getItem("store_weathers");
-    console.log(store);
     store === null
       ? localStorage.setItem("store_weathers", JSON.stringify(listCity))
       : setListCity(JSON.parse(localStorage.getItem("store_weathers")!));
@@ -76,34 +73,32 @@ const App = () => {
           setListCity,
         }}
       >
-        <Router basename={path.HOME}>
-          <Header />
-          <div className={styles.wrapperContent}>
-            <span>
-              {window.location.pathname === "/" ||
+        <Header />
+        <div className={styles.wrapperContent}>
+          <span>
+            {window.location.pathname === "/" ||
               window.location.pathname === "/dashboard"
-                ? "Dashboard"
-                : `Dashboard / Detail`}
-            </span>
-            <Switch>
-              <ConditionalRoute
-                path={`${path.DASHBOARD}`}
-                component={Dashboard}
-                exact={true}
-                redirectPath={"/"}
-                isMatch={true}
-              />
-              <ConditionalRoute
-                path={`${path.DASHBOARD}/:nameCity`}
-                component={Detail}
-                exact={true}
-                redirectPath={"/"}
-                isMatch={true}
-              />
-              <Route component={Dashboard} />
-            </Switch>
-          </div>
-        </Router>
+              ? "Dashboard"
+              : `Dashboard / Detail`}
+          </span>
+          <Switch>
+            <ConditionalRoute
+              path={`${path.DASHBOARD}`}
+              component={Dashboard}
+              exact={true}
+              redirectPath={"/"}
+              isMatch={true}
+            />
+            <ConditionalRoute
+              path={`${path.DASHBOARD}/:nameCity`}
+              component={Detail}
+              exact={true}
+              redirectPath={"/"}
+              isMatch={true}
+            />
+            <Route component={Dashboard} />
+          </Switch>
+        </div>
       </ListCityContext.Provider>
     </div>
   );

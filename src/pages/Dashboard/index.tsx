@@ -25,11 +25,8 @@ const Dashboard = () => {
   >([]);
 
   const handleLoadCity = (nameCity: string) => {
-    localStorage.setItem(
-      "store_weathers",
-      JSON.stringify([...city.listCity, nameCity])
-    );
     city.setListCity([...city.listCity, nameCity]);
+
   };
 
   React.useEffect(() => {
@@ -41,6 +38,10 @@ const Dashboard = () => {
     const promises = city.listCity.map((item: string) => loadWeather(item));
     await Promise.all(promises)
       .then((result) => {
+        localStorage.setItem(
+          "store_weathers",
+          JSON.stringify(city.listCity)
+        );
         setIsShowModal(false);
         setListWeatherCity([
           ...result.map((res: any) => ({
@@ -54,7 +55,12 @@ const Dashboard = () => {
           })),
         ]);
       })
-      .catch((error) => setIsError(true));
+      .catch((error) => {
+        setIsError(true);
+        let arr = city.listCity;
+        arr.pop();
+        city.setListCity([...arr]);
+      });
   };
 
   const loadWeather = async (city: string) =>
